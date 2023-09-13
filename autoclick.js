@@ -11,18 +11,45 @@ function clickSearchButton() {
     searchButton.click();
     if (tdCount > 0) {
       clearInterval(intervalId);
+
       const button = document.querySelector(".confirm");
       if (button) {
         button.click();
       }
       console.log("count > 0");
+      const table = document.querySelector(".table.table-bordered");
+
+      const rows = table.getElementsByTagName("tr");
+
+      for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName("td");
+
+        if (cells[1] != undefined) {
+          if (cells[1].textContent.trimEnd().trimStart().includes("Sumqayıt şəhəri")) {
+            if (cells[6].textContent == "2") {
+              if (parseInt(cells[4].textContent) > 8 && parseInt(cells[4].textContent) < 15) {
+
+                console.log('sf ' + cells[4].textContent);
+                const button = cells[14].querySelector(".btn.btn-primary");
+                if (button) {
+                  button.click();
+                }
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      /// btn bg-danger btn-md
+
     }
     if (button) {
       button.click();
     }
   }
 }
-intervalId = setInterval(clickSearchButton, 2000);
+intervalId = setInterval(clickSearchButton, 1000);
 
 ///// close
 clearInterval(intervalId);
